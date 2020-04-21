@@ -11,6 +11,7 @@ class App extends Component {
   componentDidMount() {
     return database.get()
       .then(tasksResponse => {
+        console.log(tasksResponse.data)
         this.setState({
           tasks: tasksResponse.data
         })
@@ -26,9 +27,9 @@ class App extends Component {
         <h1>ToDoList</h1>
         <ul>
           {
-            this.state.tasks.map(task =>
-              <div>{task.id} - {task.name}</div>
-            )
+            // this.state.tasks.map(task => {
+            //   <div>{task.id} - {task.name}</div>
+            // })
           }
         </ul>
       </div>

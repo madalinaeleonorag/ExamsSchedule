@@ -2,12 +2,22 @@ export function get() {
     return Promise.resolve({
         data: [
             {
-                id: 0,
-                name: 'Wash the dishes'
+                anUniversitar: '2019-2020',
+                sesiune: 'iarna',
+                an: 'I',
+                sectia: 'Informatica',
+                locuri: 30,
+                materia: 'POO',
+                profesor: 'Ion Lungu'
             },
             {
-                id: 1,
-                name: 'Make the bed'
+                anUniversitar: '2019-2020',
+                sesiune: 'vara',
+                an: 'III',
+                sectia: 'Statistica',
+                locuri: 30,
+                materia: 'Macroeconomie',
+                profesor: 'Marilena Alina'
             }
         ]
     });

@@ -1,7 +1,11 @@
-import React, { Component }  from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import * as database from './database-mockup';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 class App extends Component {
   state = {
@@ -25,13 +29,23 @@ class App extends Component {
     return (
       <div>
         <h1>ToDoList</h1>
-        <ul>
-          {
-            // this.state.tasks.map(task => {
-            //   <div>{task.id} - {task.name}</div>
-            // })
-          }
-        </ul>
+
+        {
+          this.state.tasks.map(task => {
+            return <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              {task.date}
+          </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+            {task.sectia}
+          </ExpansionPanelDetails>
+          </ExpansionPanel>
+          })
+        }
       </div>
     )
   };

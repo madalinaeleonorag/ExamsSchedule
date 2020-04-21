@@ -1,59 +1,45 @@
-import React, { Component } from 'react';
-import './App.css';
-import axios from 'axios';
-import * as database from './database-mockup';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React, { Component } from "react";
+import "./App.css";
+import * as database from "./database-mockup";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import List from "./Components/List";
+import Item from "./Components/Item";
 
 class App extends Component {
   state = {
-    tasks: []
+    databaseData: [],
   };
 
   componentDidMount() {
-    return database.get()
-      .then(tasksResponse => {
-        console.log(tasksResponse.data)
+    return database
+      .get()
+      .then((dataResponse) => {
+        console.log(dataResponse.data);
         this.setState({
-          tasks: tasksResponse.data
-        })
+          databaseData: dataResponse.data,
+        });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
-      })
-  };
+      });
+  }
 
   render() {
     return (
-      <div>
-        <h1>ToDoList</h1>
-
-        {
-          this.state.tasks.map(task => {
-            return <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              {task.date}
-          </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-            {task.sectia}
-          </ExpansionPanelDetails>
-          </ExpansionPanel>
-          })
-        }
-      </div>
-    )
-  };
-
+      <Router>
+        <Switch>
+          <Route path="/List">
+            <List data={this.state.databaseData} />
+          </Route>
+          <Route exact path="/details/:type" component={Item}/>
+        </Switch>
+      </Router>
+    );
+  }
 
   // EXAMPLE OF AXIOS USE
 
-  // 
+  //
   // state = {
   //   persons: []
   // }
@@ -67,7 +53,7 @@ class App extends Component {
   //     })
   // }
 
-  // ---- POST 
+  // ---- POST
   // handleChange = event => {
   //   this.setState({ name: event.target.value });
   // }
@@ -83,7 +69,7 @@ class App extends Component {
   //     })
   // }
 
-  // --- DELETE 
+  // --- DELETE
   // handleChange = event => {
   //   this.setState({ id: event.target.value });
   // }
@@ -96,7 +82,7 @@ class App extends Component {
   //     })
   // }
 
-  // --- ASYNC / AWAIT 
+  // --- ASYNC / AWAIT
   // handleSubmit = async event => {
   //   event.preventDefault();
   //   // Promise is resolved and value is inside of the response const.
@@ -104,7 +90,6 @@ class App extends Component {
   //   console.log(response);
   //   console.log(response.data);
   // };
-
 
   // render() {
   //   return (
@@ -114,6 +99,5 @@ class App extends Component {
   //   )
   // }
 }
-
 
 export default App;

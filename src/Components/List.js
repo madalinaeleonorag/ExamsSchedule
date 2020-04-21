@@ -1,0 +1,45 @@
+import React, { Component } from "react";
+import "./List.css";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+
+class List extends Component {
+  render() {
+    return (
+      <div>
+        <div>
+            <Button variant="contained" color="primary" component={Link} to="/Item?type=new" disableElevation>
+              Add new item
+            </Button>
+        </div>
+        <h1>Courses</h1>
+
+        {this.props.data.map((item) => {
+          return (
+            <ExpansionPanel key={item.id}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                {item.date}
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                {item.sectia}
+                  <Button variant="contained" color="primary" component={Link} to="/Item?type=existing" disableElevation>
+                    Edit item
+                  </Button>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          );
+        })}
+      </div>
+    );
+  }
+}
+
+export default List;

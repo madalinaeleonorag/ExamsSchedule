@@ -12,7 +12,7 @@ class List extends Component {
     return (
       <div>
         <div>
-            <Button variant="contained" color="primary" component={Link} to="/Item?type=new" disableElevation>
+            <Button variant="contained" color="primary" component={Link} to="/Item/new" disableElevation>
               Add new item
             </Button>
         </div>
@@ -26,11 +26,13 @@ class List extends Component {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                {item.date}
+                {item.materie}
+                <br />
+                {"An " + item.anStudiu} - {item.sectie}
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                {item.sectia}
-                  <Button variant="contained" color="primary" component={Link} to="/Item?type=existing" disableElevation>
+                
+                  <Button variant="contained" color="primary" component={Link} to={`/Item/${item.id}`} disableElevation>
                     Edit item
                   </Button>
               </ExpansionPanelDetails>

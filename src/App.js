@@ -31,7 +31,7 @@ class App extends Component {
           <Route path="/List">
             <List data={this.state.databaseData} />
           </Route>
-          <Route exact path="/details/:type" component={Item}/>
+          <Route exact path="/Item/:id" component={Item}/>
         </Switch>
       </Router>
     );

@@ -6,23 +6,78 @@ export function get() {
                 anUniversitar: '2019-2020',
                 sesiune: 'iarna',
                 anStudiu: 'I',
-                sectia: 'Informatica',
-                locuri: 30,
-                materia: 'POO',
+                sectie: 'Informatica',
+                nrLocuri: 30,
+                materie: 'POO',
                 profesor: 'Ion Lungu',
-                date: '02-02-2019'
+                dataExamen: '2020-02-02'
             },
             {
                 id: 2,
                 anUniversitar: '2019-2020',
                 sesiune: 'vara',
                 anStudiu: 'III',
-                sectia: 'Statistica',
-                locuri: 30,
-                materia: 'Macroeconomie',
+                sectie: 'Statistica',
+                nrLocuri: 30,
+                materie: 'Macroeconomie',
                 profesor: 'Marilena Alina',
-                date: '02-02-2019'
-            }
+                dataExamen: '2020-06-10'
+            },
+            {
+                id: 3,
+                anUniversitar: '2019-2020',
+                sesiune: 'iarna',
+                anStudiu: 'I',
+                sectie: 'Cibernetica',
+                nrLocuri: 30,
+                materie: 'Baze de date',
+                profesor: 'Adela Ionescu',
+                dataExamen: '2020-02-19'
+            },
+            {
+                id: 4,
+                anUniversitar: '2019-2020',
+                sesiune: 'iarna',
+                anStudiu: 'II',
+                sectie: 'Informatica',
+                nrLocuri: 30,
+                materie: 'Java',
+                profesor: 'Cristian Toma',
+                dataExamen: '2020-02-20'
+            },
+            {
+                id: 5,
+                anUniversitar: '2019-2020',
+                sesiune: 'vara',
+                anStudiu: 'II',
+                sectie: 'Informatica',
+                nrLocuri: 30,
+                materie: 'Testare',
+                profesor: 'Paul Georgescu',
+                dataExamen: '2020-05-25'
+            },
+            {
+                id: 6,
+                anUniversitar: '2019-2020',
+                sesiune: 'iarna',
+                anStudiu: 'III',
+                sectie: 'Management',
+                nrLocuri: 30,
+                materie: 'Management',
+                profesor: 'Mihai Ionel',
+                dataExamen: '2020-01-07'
+            },
+            {
+                id: 7,
+                anUniversitar: '2019-2020',
+                sesiune: 'vara',
+                anStudiu: 'I',
+                sectie: 'Statistica',
+                nrLocuri: 30,
+                materie: 'Microeconomie',
+                profesor: 'Marilena Alina',
+                dataExamen: '2020-06-02'
+            },
         ]
     });
 }

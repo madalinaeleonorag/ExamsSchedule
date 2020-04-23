@@ -1,28 +1,57 @@
 import React, { Component } from "react";
 import "./Item.css";
-import { useParams } from "react-router-dom";
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 import * as database from "../database-mockup";
-
+import Button from "@material-ui/core/Button";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 
 class Item extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
   state = {
-    exam: {},
+    exam: {
+      id: 0,
+      anUniversitar: "2019-2020",
+      sesiune: "summer",
+      anStudiu: "I",
+      sectie: "",
+      nrLocuri: 30,
+      materie: "",
+      profesor: "",
+      dataExamen: "",
+    },
   };
 
+  handleInputChange(event) {
+    console.log(event);
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      exam: {
+        [name]: value,
+      },
+    });
+  }
+
   componentDidMount() {
+    let idParam = this.props.match.params.id;
     return database
       .get()
       .then((dataResponse) => {
         this.setState({
-          exam: dataResponse.data.find(item => item.id == this.props.match.params.id)
+          exam: dataResponse.data.filter(
+            (item) => item.id === +idParam
+          )[0],
         });
+        console.log('exam after', this.state.exam)
       })
       .catch((error) => {
         console.log(error);
@@ -32,49 +61,92 @@ class Item extends Component {
   render() {
     return (
       <form className="exams-form" noValidate autoComplete="off">
-        <TextField
-          id="standard-select-academic-year"
-          select
-          label="Select academic year">
-          <MenuItem value="2019-2020">2017-2018</MenuItem>
-          <MenuItem value="2019-2020">2018-2019</MenuItem>
+        <InputLabel>Select academic year</InputLabel>
+        <Select
+          value={this.state.exam ? this.state.exam.anUniversitar : '2019-2020'}
+          onChange={this.handleInputChange}
+          name="anUniversitar"
+        >
+          <MenuItem value="2017-2018">2017-2018</MenuItem>
+          <MenuItem value="2018-2019">2018-2019</MenuItem>
           <MenuItem value="2019-2020">2019-2020</MenuItem>
-        </TextField>
+        </Select>
 
-        <TextField
-          id="standard-select-exams-period"
-          select
-          label="Select exams period">
+        <InputLabel>Select exams period</InputLabel>
+        <Select
+          value={this.state.exam ? this.state.exam.sesiune : 'summer'}
+          onChange={this.handleInputChange}
+          name="sesiune"
+        >
           <MenuItem value="summer">Summer</MenuItem>
           <MenuItem value="winter">Winter</MenuItem>
-        </TextField>
+        </Select>
 
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Year of study</FormLabel>
-          <RadioGroup name="year-of-study"  >
-            <FormControlLabel value="I" control={<Radio />} label="I" />
-            <FormControlLabel value="II" control={<Radio />} label="II" />
-            <FormControlLabel value="III" control={<Radio />} label="III" />
-          </RadioGroup>
-        </FormControl>
+        <InputLabel>Year of study</InputLabel>
+        <Select
+          value={this.state.exam ? this.state.exam.anStudiu : 'I'}
+          onChange={this.handleInputChange}
+          name="anStudiu"
+        >
+          <MenuItem value="I">I</MenuItem>
+          <MenuItem value="II">II</MenuItem>
+          <MenuItem value="III">III</MenuItem>
+        </Select>
 
-        <TextField id="field-of-study" label="Field of study" value={(this.state.exam || "").sectie}/>
-        <TextField id="no-of-students" label="Number of students" type="number" value={(this.state.exam || "").nrLocuri} />
-        <TextField id="teacher" label="Teacher"  value={(this.state.exam || "").profesor}/>
         <TextField
-          id="date"
-          label="Exam date"
-          type="date"
-          value={(this.state.exam || "").dataExamen || "2020-04-04"}
+          label="Field of study"
+          onChange={this.handleInputChange}
+          name="sectie"
+          value={this.state.exam ? this.state.exam.sectie : ''}
         />
 
-      </form>
+        <TextField
+          label="Number of students"
+          type="number"
+          name="nrLocuri"
+          onChange={this.handleInputChange}
+          value={this.state.exam ? this.state.exam.nrLocuri : 0}
+        />
 
-    )
+        <TextField
+          label="Teacher"
+          name="profesor"
+          onChange={this.handleInputChange}
+          value={this.state.exam ? this.state.exam.profesor : ''}
+        />
+
+        <TextField
+          type="date"
+          name="dataExamen"
+          onChange={this.handleInputChange}
+          value={this.state.exam ? this.state.exam.dataExamen : ''}
+        />
+
+        <Buttons id={this.props.match.params.id} />
+      </form>
+    );
   }
 }
 
-
-
+function Buttons(idItem) {
+  if (idItem.id === "new") {
+    return (
+      <Button variant="contained" color="primary" disableElevation>
+        Save new item
+      </Button>
+    );
+  } else {
+    return (
+      <div>
+        <Button variant="contained" color="primary" disableElevation>
+          Save item
+        </Button>
+        <Button variant="contained" color="primary" disableElevation>
+          Remove item
+        </Button>
+      </div>
+    );
+  }
+}
 
 export default Item;

@@ -4,7 +4,7 @@ export function get() {
             {
                 id: 1,
                 anUniversitar: '2019-2020',
-                sesiune: 'iarna',
+                sesiune: 'winter',
                 anStudiu: 'I',
                 sectie: 'Informatica',
                 nrLocuri: 30,
@@ -15,7 +15,7 @@ export function get() {
             {
                 id: 2,
                 anUniversitar: '2019-2020',
-                sesiune: 'vara',
+                sesiune: 'summer',
                 anStudiu: 'III',
                 sectie: 'Statistica',
                 nrLocuri: 30,
@@ -26,7 +26,7 @@ export function get() {
             {
                 id: 3,
                 anUniversitar: '2019-2020',
-                sesiune: 'iarna',
+                sesiune: 'winter',
                 anStudiu: 'I',
                 sectie: 'Cibernetica',
                 nrLocuri: 30,
@@ -37,7 +37,7 @@ export function get() {
             {
                 id: 4,
                 anUniversitar: '2019-2020',
-                sesiune: 'iarna',
+                sesiune: 'winter',
                 anStudiu: 'II',
                 sectie: 'Informatica',
                 nrLocuri: 30,
@@ -48,7 +48,7 @@ export function get() {
             {
                 id: 5,
                 anUniversitar: '2019-2020',
-                sesiune: 'vara',
+                sesiune: 'summer',
                 anStudiu: 'II',
                 sectie: 'Informatica',
                 nrLocuri: 30,
@@ -59,7 +59,7 @@ export function get() {
             {
                 id: 6,
                 anUniversitar: '2019-2020',
-                sesiune: 'iarna',
+                sesiune: 'winter',
                 anStudiu: 'III',
                 sectie: 'Management',
                 nrLocuri: 30,
@@ -70,7 +70,7 @@ export function get() {
             {
                 id: 7,
                 anUniversitar: '2019-2020',
-                sesiune: 'vara',
+                sesiune: 'summer',
                 anStudiu: 'I',
                 sectie: 'Statistica',
                 nrLocuri: 30,

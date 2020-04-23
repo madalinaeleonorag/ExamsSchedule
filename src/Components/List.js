@@ -12,9 +12,15 @@ class List extends Component {
     return (
       <div>
         <div>
-            <Button variant="contained" color="primary" component={Link} to="/Item/new" disableElevation>
-              Add new item
-            </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            to="/Item/new"
+            disableElevation
+          >
+            Add new item
+          </Button>
         </div>
         <h1>Courses</h1>
 
@@ -31,10 +37,15 @@ class List extends Component {
                 {"An " + item.anStudiu} - {item.sectie}
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                
-                  <Button variant="contained" color="primary" component={Link} to={`/Item/${item.id}`} disableElevation>
-                    Edit item
-                  </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component={Link}
+                  to={`/Item/${item.id}`}
+                  disableElevation
+                >
+                  Edit item
+                </Button>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           );

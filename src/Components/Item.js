@@ -47,7 +47,7 @@ class Item extends Component {
       .get()
       .then((dataResponse) => {
         this.setState({
-          exam: dataResponse.data.filter((item) => item.id === +idParam)[0],
+          exam: dataResponse.filter((item) => item.id === +idParam)[0],
         });
         console.log("exam after", this.state.exam);
       })

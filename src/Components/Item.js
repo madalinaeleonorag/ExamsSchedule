@@ -6,9 +6,15 @@ import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import { connect } from 'react-redux';
+import * as actions from '../store/actions/action-exams';
 import Spinner from "./UI/Spinner";
+import * as database from "../database-mockup";
 
 class Item extends Component {
+
+  state = {
+    currentExam: {}
+  }
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -16,7 +22,12 @@ class Item extends Component {
   }
 
   handleInputChange(event) {
-    console.log(event.target.value);
+    this.setState({
+      currentExam: {
+        ...this.state.currentExam,
+        [event.target.name]: event.target.value
+      }
+    })
   }
 
   componentDidMount() {
@@ -32,24 +43,27 @@ class Item extends Component {
     //   .catch((error) => {
     //     console.log(error);
     //   });
+    this.setState({
+      currentExam: this.props.exms
+    })
   }
 
-  saveNewItem() {
-    this.database.saveNewItem(this.state.exam);
+  saveNewItem = () => {
+    this.database.saveNewItem(this.state.currentExam);
   }
 
-  saveItem() {
-    this.database.saveItem(this.state.exam);
+  saveItem = () => {
+    this.database.saveItem(this.state.currentExam);
   }
 
-  removeItem() {
-    this.database.removeItem(this.state.exam.id);
+  removeItem = () => {
+    this.database.removeItem(this.state.currentExam.id);
   }
 
   render() {
     let exam = this.props.exms;
     if (this.props.exms) {
-      return(
+      return (
         <form className="exams-form" noValidate autoComplete="off">
           <InputLabel>Select academic year</InputLabel>
           <Select
@@ -112,35 +126,28 @@ class Item extends Component {
             defaultValue={exam.dataExamen}
           />
 
-          <Buttons id={this.id} />
+          {this.props.match.params.id === "new" && (
+            <Button variant="contained" color="primary" disableElevation onClick={this.saveNewItem}>
+              Save new item
+          </Button>
+          )}
+          {this.props.match.params.id !== "new" && (
+            <div>
+              <Button variant="contained" color="primary" disableElevation onClick={this.saveItem}>
+                Save item
+            </Button>
+              <Button variant="contained" color="primary" disableElevation onClick={this.removeItem}>
+                Remove item
+            </Button>
+            </div>
+          )}
         </form>
       )
-    }else {
+    } else {
       return (
-       <Spinner></Spinner>
+        <Spinner></Spinner>
       );
     }
-  }
-}
-
-function Buttons(idItem) {
-  if (idItem.id === "new") {
-    return (
-      <Button variant="contained" color="primary" disableElevation>
-        Save new item
-      </Button>
-    );
-  } else {
-    return (
-      <div>
-        <Button variant="contained" color="primary" disableElevation>
-          Save item
-        </Button>
-        <Button variant="contained" color="primary" disableElevation>
-          Remove item
-        </Button>
-      </div>
-    );
   }
 }
 
@@ -152,7 +159,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-   
+    onUpdateExam: (currentExam) => dispatch(actions.updateExam(currentExam)),
   }
 }
 

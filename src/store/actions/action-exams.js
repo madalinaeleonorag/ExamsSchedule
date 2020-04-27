@@ -18,3 +18,7 @@ export const initExams = () => {
             });
     };
 };
+
+export const updateExam = currentExam => {
+    console.log(currentExam);
+};

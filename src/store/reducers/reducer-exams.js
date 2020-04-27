@@ -10,7 +10,8 @@ const reducer = (state = initialState, action) => {
       ...state,
       exams: action.exams
     };
-    default: return state;
+    default: 
+    return state;
 }
 };
 

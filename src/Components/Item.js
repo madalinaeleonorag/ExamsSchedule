@@ -2,128 +2,98 @@ import React, { Component } from "react";
 import "./Item.css";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import * as database from "../database-mockup";
 import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
+import { connect } from 'react-redux';
 
 class Item extends Component {
   constructor(props) {
     super(props);
-
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.id = this.props.match.params.id;
   }
 
-  state = {
-    exam: {
-      id: 0,
-      anUniversitar: "2019-2020",
-      sesiune: "summer",
-      anStudiu: "I",
-      sectie: "",
-      nrLocuri: 30,
-      materie: "",
-      profesor: "",
-      dataExamen: "",
-    },
-  };
-
   handleInputChange(event) {
-    console.log(event);
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      exam: {
-        [name]: value,
-      },
-    });
+    console.log(event.target.value);
   }
 
   componentDidMount() {
-    let idParam = this.props.match.params.id;
-    return database
-      .get()
-      .then((dataResponse) => {
-        this.setState({
-          exam: dataResponse.data.filter(
-            (item) => item.id === +idParam
-          )[0],
-        });
-        console.log('exam after', this.state.exam)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log(this.props.exms)
   }
 
   render() {
+    let exam = this.props.exms;
+    if (this.props.exms) {
+      exam = (
+        <form className="exams-form" noValidate autoComplete="off">
+          <InputLabel>Select academic year</InputLabel>
+          <Select
+            defaultValue={exam.anUniversitar}
+            onChange={this.handleInputChange}
+            name="anUniversitar"
+          >
+            <MenuItem value="2017-2018">2017-2018</MenuItem>
+            <MenuItem value="2018-2019">2018-2019</MenuItem>
+            <MenuItem value="2019-2020">2019-2020</MenuItem>
+          </Select>
+
+          <InputLabel>Select exams period</InputLabel>
+          <Select
+            defaultValue={exam.sesiune}
+            onChange={this.handleInputChange}
+            name="sesiune"
+          >
+            <MenuItem value="summer">Summer</MenuItem>
+            <MenuItem value="winter">Winter</MenuItem>
+          </Select>
+
+          <InputLabel>Year of study</InputLabel>
+          <Select
+            defaultValue={exam.anStudiu}
+            onChange={this.handleInputChange}
+            name="anStudiu"
+          >
+            <MenuItem value="I">I</MenuItem>
+            <MenuItem value="II">II</MenuItem>
+            <MenuItem value="III">III</MenuItem>
+          </Select>
+
+          <TextField
+            label="Field of study"
+            onChange={this.handleInputChange}
+            name="sectie"
+            defaultValue={exam.sectie}
+          />
+
+          <TextField
+            label="Number of students"
+            type="number"
+            name="nrLocuri"
+            onChange={this.handleInputChange}
+            defaultValue={exam.nrLocuri}
+          />
+
+          <TextField
+            label="Teacher"
+            name="profesor"
+            onChange={this.handleInputChange}
+            defaultValue={exam.profesor}
+          />
+
+          <TextField
+            type="date"
+            name="dataExamen"
+            onChange={this.handleInputChange}
+            defaultValue={exam.dataExamen}
+          />
+
+          <Buttons id={this.id} />
+        </form>
+      )
+    }
     return (
-      <form className="exams-form" noValidate autoComplete="off">
-        <InputLabel>Select academic year</InputLabel>
-        <Select
-          value={this.state.exam ? this.state.exam.anUniversitar : '2019-2020'}
-          onChange={this.handleInputChange}
-          name="anUniversitar"
-        >
-          <MenuItem value="2017-2018">2017-2018</MenuItem>
-          <MenuItem value="2018-2019">2018-2019</MenuItem>
-          <MenuItem value="2019-2020">2019-2020</MenuItem>
-        </Select>
-
-        <InputLabel>Select exams period</InputLabel>
-        <Select
-          value={this.state.exam ? this.state.exam.sesiune : 'summer'}
-          onChange={this.handleInputChange}
-          name="sesiune"
-        >
-          <MenuItem value="summer">Summer</MenuItem>
-          <MenuItem value="winter">Winter</MenuItem>
-        </Select>
-
-        <InputLabel>Year of study</InputLabel>
-        <Select
-          value={this.state.exam ? this.state.exam.anStudiu : 'I'}
-          onChange={this.handleInputChange}
-          name="anStudiu"
-        >
-          <MenuItem value="I">I</MenuItem>
-          <MenuItem value="II">II</MenuItem>
-          <MenuItem value="III">III</MenuItem>
-        </Select>
-
-        <TextField
-          label="Field of study"
-          onChange={this.handleInputChange}
-          name="sectie"
-          value={this.state.exam ? this.state.exam.sectie : ''}
-        />
-
-        <TextField
-          label="Number of students"
-          type="number"
-          name="nrLocuri"
-          onChange={this.handleInputChange}
-          value={this.state.exam ? this.state.exam.nrLocuri : 0}
-        />
-
-        <TextField
-          label="Teacher"
-          name="profesor"
-          onChange={this.handleInputChange}
-          value={this.state.exam ? this.state.exam.profesor : ''}
-        />
-
-        <TextField
-          type="date"
-          name="dataExamen"
-          onChange={this.handleInputChange}
-          value={this.state.exam ? this.state.exam.dataExamen : ''}
-        />
-
-        <Buttons id={this.props.match.params.id} />
-      </form>
+      <div>{exam}</div>
     );
   }
 }
@@ -149,4 +119,16 @@ function Buttons(idItem) {
   }
 }
 
-export default Item;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    exms: state.exams.find(item => item.id == ownProps.match.params.id),
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+   
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

@@ -56,16 +56,16 @@ class Item extends Component {
       });
   }
 
-  saveNewItem(e) {
-    console.log(e);
+  saveNewItem() {
+    this.database.saveNewItem(this.state.exam);
   }
 
-  saveItem(e) {
-    console.log(e);
+  saveItem() {
+    this.database.saveItem(this.state.exam);
   }
 
-  removeItem(e) {
-    console.log(e);
+  removeItem() {
+    this.database.removeItem(this.state.exam.id);
   }
 
   render() {
@@ -133,17 +133,17 @@ class Item extends Component {
         />
 
         {this.props.match.params.id === "new" && (
-          <Button variant="contained" color="primary" disableElevation onClick={this.saveNewItem}>
+          <Button variant="contained" color="primary" disableElevation onClick={this.saveNewItem.bind(this)}>
             Save new item
           </Button>
         )}
 
         {this.props.match.params.id !== "new" && (
           <div>
-            <Button variant="contained" color="primary" disableElevation onClick={this.saveItem}>
+            <Button variant="contained" color="primary" disableElevation onClick={this.saveItem.bind(this)}>
               Save item
             </Button>
-            <Button variant="contained" color="primary" disableElevation onClick={this.removeItem}>
+            <Button variant="contained" color="primary" disableElevation onClick={this.removeItem.bind(this)}>
               Remove item
             </Button>
           </div>

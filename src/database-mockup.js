@@ -81,3 +81,15 @@ const data = [
 export function get() {
   return Promise.resolve(data);
 }
+
+export function saveNewItem(data) {
+  console.log(data);
+}
+
+export function saveEdits(data) {
+  console.log(data);
+}
+
+export function removeItem(id) {
+  console.log(id);
+}

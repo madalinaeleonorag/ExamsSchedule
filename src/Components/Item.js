@@ -49,15 +49,15 @@ class Item extends Component {
   }
 
   saveNewItem = () => {
-    this.database.saveNewItem(this.state.currentExam);
+    database.saveNewItem(this.state.currentExam);
   }
 
   saveItem = () => {
-    this.database.saveItem(this.state.currentExam);
+    database.saveEdits(this.state.currentExam);
   }
 
   removeItem = () => {
-    this.database.removeItem(this.state.currentExam.id);
+    database.removeItem(this.state.currentExam.id);
   }
 
   render() {

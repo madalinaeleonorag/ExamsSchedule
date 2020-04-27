@@ -1,6 +1,6 @@
 const data = [
   {
-    id: 1,
+    id: "1",
     anUniversitar: "2019-2020",
     sesiune: "winter",
     anStudiu: "I",
@@ -11,7 +11,7 @@ const data = [
     dataExamen: "2020-02-02",
   },
   {
-    id: 2,
+    id: "2",
     anUniversitar: "2019-2020",
     sesiune: "summer",
     anStudiu: "III",
@@ -22,7 +22,7 @@ const data = [
     dataExamen: "2020-06-10",
   },
   {
-    id: 3,
+    id: "3",
     anUniversitar: "2019-2020",
     sesiune: "winter",
     anStudiu: "I",
@@ -33,7 +33,7 @@ const data = [
     dataExamen: "2020-02-19",
   },
   {
-    id: 4,
+    id: "4",
     anUniversitar: "2019-2020",
     sesiune: "winter",
     anStudiu: "II",
@@ -44,7 +44,7 @@ const data = [
     dataExamen: "2020-02-20",
   },
   {
-    id: 5,
+    id: "5",
     anUniversitar: "2019-2020",
     sesiune: "summer",
     anStudiu: "II",
@@ -55,7 +55,7 @@ const data = [
     dataExamen: "2020-05-25",
   },
   {
-    id: 6,
+    id: "6",
     anUniversitar: "2019-2020",
     sesiune: "winter",
     anStudiu: "III",
@@ -66,7 +66,7 @@ const data = [
     dataExamen: "2020-01-07",
   },
   {
-    id: 7,
+    id: "7",
     anUniversitar: "2019-2020",
     sesiune: "summer",
     anStudiu: "I",

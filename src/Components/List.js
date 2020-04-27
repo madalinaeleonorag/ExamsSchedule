@@ -6,18 +6,12 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
-import * as actions from '../store/actions/action-exams';
 import Spinner from "./UI/Spinner";
 
 class List extends Component {
 
-  componentDidMount() {
-    this.props.onInitExams();
-  }
-
   render() {
-    if (this.props.exms) {
+    if (this.props.data) {
       return (
         <div>
           <div>
@@ -33,7 +27,7 @@ class List extends Component {
           </div>
           <h1>Courses</h1>
 
-          {this.props.exms.map((item) => {
+          {this.props.data.map((item) => {
             return (
               <ExpansionPanel key={item.id}>
                 <ExpansionPanelSummary
@@ -67,15 +61,4 @@ class List extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    exms: state.exams,
-  };
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onInitExams: () => dispatch(actions.initExams()),
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default List;

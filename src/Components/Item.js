@@ -8,16 +8,19 @@ import Select from "@material-ui/core/Select";
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/action-exams';
 import Spinner from "./UI/Spinner";
-import * as database from "../database-mockup";
+import uuid from "uuid";
+import { Link } from "react-router-dom";
 
 class Item extends Component {
-
   state = {
+    disabled: false,
     currentExam: {}
   }
+
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.id = this.props.match.params.id;
   }
 
@@ -30,44 +33,43 @@ class Item extends Component {
     })
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      currentExam: {
+        ...this.state.currentExam,
+        id: uuid.v4()
+      },
+      disabled: false
+    }, () => this.saveNewItem());
+  }
+
   componentDidMount() {
-    // let idParam = this.props.match.params.id;
-    // return database
-    //   .get()
-    //   .then((dataResponse) => {
-    //     this.setState({
-    //       exam: dataResponse.filter((item) => item.id === +idParam)[0],
-    //     });
-    //     console.log("exam after", this.state.exam);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
     this.setState({
       currentExam: this.props.exms
     })
   }
 
-  // saveNewItem = () => {
-  //   this.database.saveNewItem(this.state.currentExam);
-  // }
+  saveNewItem = () => {
+    this.props.onAddNewExam(this.state.currentExam);
+  }
 
   saveItem = () => {
     this.props.onUpdateExam(this.state.currentExam);
   }
 
-  //removeItem = () => {
-  //   this.database.removeItem(this.state.currentExam.id);
-  // }
+  removeItem = () => {
+    this.props.onRemoveExam(this.state.currentExam.id);
+  }
 
   render() {
     let exam = this.props.exms;
-    if (this.props.exms) {
+    if (this.props.exms || this.id === 'new') {
       return (
-        <form className="exams-form" noValidate autoComplete="off">
+        <form className="exams-form" noValidate autoComplete="off" onSubmit={this.handleSubmit}>
           <InputLabel>Select academic year</InputLabel>
           <Select
-            defaultValue={exam.anUniversitar}
+            defaultValue={exam ? exam.anUniversitar : ""}
             onChange={this.handleInputChange}
             name="anUniversitar"
           >
@@ -78,7 +80,7 @@ class Item extends Component {
 
           <InputLabel>Select exams period</InputLabel>
           <Select
-            defaultValue={exam.sesiune}
+            defaultValue={exam ? exam.sesiune : ""}
             onChange={this.handleInputChange}
             name="sesiune"
           >
@@ -88,7 +90,7 @@ class Item extends Component {
 
           <InputLabel>Year of study</InputLabel>
           <Select
-            defaultValue={exam.anStudiu}
+            defaultValue={exam ? exam.anStudiu : ""}
             onChange={this.handleInputChange}
             name="anStudiu"
           >
@@ -101,7 +103,13 @@ class Item extends Component {
             label="Field of study"
             onChange={this.handleInputChange}
             name="sectie"
-            defaultValue={exam.sectie}
+            defaultValue={exam ? exam.sectie : ""}
+          />
+          <TextField
+            label="Subject"
+            name="materie"
+            onChange={this.handleInputChange}
+            defaultValue={exam ? exam.materie : ""}
           />
 
           <TextField
@@ -109,36 +117,39 @@ class Item extends Component {
             type="number"
             name="nrLocuri"
             onChange={this.handleInputChange}
-            defaultValue={exam.nrLocuri}
+            defaultValue={exam ? exam.nrLocuri : ""}
           />
 
           <TextField
             label="Teacher"
             name="profesor"
             onChange={this.handleInputChange}
-            defaultValue={exam.profesor}
+            defaultValue={exam ? exam.profesor : ""}
           />
 
           <TextField
             type="date"
             name="dataExamen"
             onChange={this.handleInputChange}
-            defaultValue={exam.dataExamen}
+            defaultValue={exam ? exam.dataExamen : ""}
           />
 
-          {/* {this.props.match.params.id === "new" && (
-            <Button variant="contained" color="primary" disableElevation onClick={this.saveNewItem}>
+          {this.id === "new" && (
+            <Button type="submit" variant="contained" color="primary"  disabled={this.state.disabled}>
               Save new item
           </Button>
-          )} */}
-          {this.props.match.params.id !== "new" && (
+          )}
+          {this.id !== "new" && (
             <div>
-              <Button variant="contained" color="primary" disableElevation onClick={this.saveItem}>
+              <Button variant="contained" color="primary"  onClick={this.saveItem}>
                 Save item
             </Button>
-              {/* <Button variant="contained" color="primary" disableElevation onClick={this.removeItem}>
+              <Button variant="contained" color="primary"  
+              onClick={this.removeItem} 
+              component={Link}
+              to="/List">
                 Remove item
-            </Button> */}
+            </Button>
             </div>
           )}
         </form>
@@ -153,13 +164,15 @@ class Item extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    exms: state.exams.find(item => item.id === +ownProps.match.params.id),
+    exms: state.exams.find(item => item.id === ownProps.match.params.id),
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onUpdateExam: (currentExam) => dispatch(actions.updateExam(currentExam)),
+    onRemoveExam: (currentExamId) => dispatch(actions.removeExam(currentExamId)),
+    onAddNewExam: (newExam) => dispatch(actions.addExam(newExam)),
   }
 }
 

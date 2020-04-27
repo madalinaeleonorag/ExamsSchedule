@@ -20,10 +20,25 @@ export const initExams = () => {
 };
 
 export const updateExam = (currentExam) => {
-    console.log(currentExam);
     database.saveEdits(currentExam);
     return {
         type: actionTypes.UPDATE_EXAM,
         updatedExam: currentExam
+    };
+};
+
+export const removeExam = (examId) => {
+    database.removeItem(examId);
+    return {
+        type: actionTypes.REMOVE_EXAM,
+        removedExamId: examId
+    };
+};
+
+export const addExam = (newExam) => {
+    database.saveNewItem(newExam);
+    return {
+        type: actionTypes.ADD_EXAM,
+        addedExam: newExam
     };
 };

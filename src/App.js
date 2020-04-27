@@ -1,27 +1,29 @@
 import React, { Component } from "react";
 import "./App.css";
-import * as database from "./database-mockup";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import List from "./Components/List";
 import Item from "./Components/Item";
+import { connect } from 'react-redux';
+import * as actions from './store/actions/action-exams';
 
 class App extends Component {
-  state = {
-    databaseData: [],
-  };
+  // state = {
+  //   databaseData: [],
+  // };
 
   componentDidMount() {
-    return database
-      .get()
-      .then((dataResponse) => {
-        console.log(dataResponse);
-        this.setState({
-          databaseData: dataResponse,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // return database
+    //   .get()
+    //   .then((dataResponse) => {
+    //     console.log(dataResponse);
+    //     this.setState({
+    //       databaseData: dataResponse,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    this.props.onInitExams();
   }
 
   render() {
@@ -29,7 +31,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path="/List">
-            <List data={this.state.databaseData} />
+            <List data={this.props.exms} />
           </Route>
           <Route exact path="/Item/:id" component={Item}/>
         </Switch>
@@ -38,4 +40,16 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    exms: state.exams,
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onInitExams: () => dispatch(actions.initExams()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

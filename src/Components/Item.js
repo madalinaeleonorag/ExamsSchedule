@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import { connect } from 'react-redux';
+import Spinner from "./UI/Spinner";
 
 class Item extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class Item extends Component {
   render() {
     let exam = this.props.exms;
     if (this.props.exms) {
-      exam = (
+      return(
         <form className="exams-form" noValidate autoComplete="off">
           <InputLabel>Select academic year</InputLabel>
           <Select
@@ -114,10 +115,11 @@ class Item extends Component {
           <Buttons id={this.id} />
         </form>
       )
+    }else {
+      return (
+       <Spinner></Spinner>
+      );
     }
-    return (
-      <div>{exam}</div>
-    );
   }
 }
 
@@ -144,7 +146,7 @@ function Buttons(idItem) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    exms: state.exams.find(item => item.id == ownProps.match.params.id),
+    exms: state.exams.find(item => item.id === +ownProps.match.params.id),
   };
 }
 

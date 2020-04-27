@@ -11,7 +11,7 @@ export const initExams = () => {
     return dispatch => {
         database.get()
             .then((response) => {
-                dispatch(setExams(response.data));
+                dispatch(setExams(response));
             })
             .catch((error) => {
                 console.log(error);

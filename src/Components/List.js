@@ -26,6 +26,7 @@ class List extends Component {
 
         {this.props.data.map((item) => {
           return (
+
             <ExpansionPanel key={item.id}>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}

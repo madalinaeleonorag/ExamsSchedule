@@ -47,15 +47,25 @@ class Item extends Component {
       .get()
       .then((dataResponse) => {
         this.setState({
-          exam: dataResponse.data.filter(
-            (item) => item.id === +idParam
-          )[0],
+          exam: dataResponse.data.filter((item) => item.id === +idParam)[0],
         });
-        console.log('exam after', this.state.exam)
+        console.log("exam after", this.state.exam);
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  saveNewItem(e) {
+    console.log(e);
+  }
+
+  saveItem(e) {
+    console.log(e);
+  }
+
+  removeItem(e) {
+    console.log(e);
   }
 
   render() {
@@ -63,7 +73,7 @@ class Item extends Component {
       <form className="exams-form" noValidate autoComplete="off">
         <InputLabel>Select academic year</InputLabel>
         <Select
-          value={this.state.exam ? this.state.exam.anUniversitar : '2019-2020'}
+          value={this.state.exam ? this.state.exam.anUniversitar : "2019-2020"}
           onChange={this.handleInputChange}
           name="anUniversitar"
         >
@@ -74,7 +84,7 @@ class Item extends Component {
 
         <InputLabel>Select exams period</InputLabel>
         <Select
-          value={this.state.exam ? this.state.exam.sesiune : 'summer'}
+          value={this.state.exam ? this.state.exam.sesiune : "summer"}
           onChange={this.handleInputChange}
           name="sesiune"
         >
@@ -84,7 +94,7 @@ class Item extends Component {
 
         <InputLabel>Year of study</InputLabel>
         <Select
-          value={this.state.exam ? this.state.exam.anStudiu : 'I'}
+          value={this.state.exam ? this.state.exam.anStudiu : "I"}
           onChange={this.handleInputChange}
           name="anStudiu"
         >
@@ -97,7 +107,7 @@ class Item extends Component {
           label="Field of study"
           onChange={this.handleInputChange}
           name="sectie"
-          value={this.state.exam ? this.state.exam.sectie : ''}
+          value={this.state.exam ? this.state.exam.sectie : ""}
         />
 
         <TextField
@@ -112,39 +122,33 @@ class Item extends Component {
           label="Teacher"
           name="profesor"
           onChange={this.handleInputChange}
-          value={this.state.exam ? this.state.exam.profesor : ''}
+          value={this.state.exam ? this.state.exam.profesor : ""}
         />
 
         <TextField
           type="date"
           name="dataExamen"
           onChange={this.handleInputChange}
-          value={this.state.exam ? this.state.exam.dataExamen : ''}
+          value={this.state.exam ? this.state.exam.dataExamen : ""}
         />
 
-        <Buttons id={this.props.match.params.id} />
-      </form>
-    );
-  }
-}
+        {this.props.match.params.id === "new" && (
+          <Button variant="contained" color="primary" disableElevation onClick={this.saveNewItem}>
+            Save new item
+          </Button>
+        )}
 
-function Buttons(idItem) {
-  if (idItem.id === "new") {
-    return (
-      <Button variant="contained" color="primary" disableElevation>
-        Save new item
-      </Button>
-    );
-  } else {
-    return (
-      <div>
-        <Button variant="contained" color="primary" disableElevation>
-          Save item
-        </Button>
-        <Button variant="contained" color="primary" disableElevation>
-          Remove item
-        </Button>
-      </div>
+        {this.props.match.params.id !== "new" && (
+          <div>
+            <Button variant="contained" color="primary" disableElevation onClick={this.saveItem}>
+              Save item
+            </Button>
+            <Button variant="contained" color="primary" disableElevation onClick={this.removeItem}>
+              Remove item
+            </Button>
+          </div>
+        )}
+      </form>
     );
   }
 }

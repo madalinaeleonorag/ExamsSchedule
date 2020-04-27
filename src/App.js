@@ -14,9 +14,9 @@ class App extends Component {
     return database
       .get()
       .then((dataResponse) => {
-        console.log(dataResponse.data);
+        console.log(dataResponse);
         this.setState({
-          databaseData: dataResponse.data,
+          databaseData: dataResponse,
         });
       })
       .catch((error) => {

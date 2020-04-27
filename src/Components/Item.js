@@ -19,7 +19,30 @@ class Item extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.exms)
+    // let idParam = this.props.match.params.id;
+    // return database
+    //   .get()
+    //   .then((dataResponse) => {
+    //     this.setState({
+    //       exam: dataResponse.filter((item) => item.id === +idParam)[0],
+    //     });
+    //     console.log("exam after", this.state.exam);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  }
+
+  saveNewItem() {
+    this.database.saveNewItem(this.state.exam);
+  }
+
+  saveItem() {
+    this.database.saveItem(this.state.exam);
+  }
+
+  removeItem() {
+    this.database.removeItem(this.state.exam.id);
   }
 
   render() {

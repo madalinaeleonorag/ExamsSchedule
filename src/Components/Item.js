@@ -48,17 +48,17 @@ class Item extends Component {
     })
   }
 
-  saveNewItem = () => {
-    this.database.saveNewItem(this.state.currentExam);
-  }
+  // saveNewItem = () => {
+  //   this.database.saveNewItem(this.state.currentExam);
+  // }
 
   saveItem = () => {
-    this.database.saveItem(this.state.currentExam);
+    this.props.onUpdateExam(this.state.currentExam);
   }
 
-  removeItem = () => {
-    this.database.removeItem(this.state.currentExam.id);
-  }
+  //removeItem = () => {
+  //   this.database.removeItem(this.state.currentExam.id);
+  // }
 
   render() {
     let exam = this.props.exms;
@@ -126,19 +126,19 @@ class Item extends Component {
             defaultValue={exam.dataExamen}
           />
 
-          {this.props.match.params.id === "new" && (
+          {/* {this.props.match.params.id === "new" && (
             <Button variant="contained" color="primary" disableElevation onClick={this.saveNewItem}>
               Save new item
           </Button>
-          )}
+          )} */}
           {this.props.match.params.id !== "new" && (
             <div>
               <Button variant="contained" color="primary" disableElevation onClick={this.saveItem}>
                 Save item
             </Button>
-              <Button variant="contained" color="primary" disableElevation onClick={this.removeItem}>
+              {/* <Button variant="contained" color="primary" disableElevation onClick={this.removeItem}>
                 Remove item
-            </Button>
+            </Button> */}
             </div>
           )}
         </form>

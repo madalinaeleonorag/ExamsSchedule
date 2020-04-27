@@ -19,6 +19,11 @@ export const initExams = () => {
     };
 };
 
-export const updateExam = currentExam => {
+export const updateExam = (currentExam) => {
     console.log(currentExam);
+    database.saveEdits(currentExam);
+    return {
+        type: actionTypes.UPDATE_EXAM,
+        updatedExam: currentExam
+    };
 };

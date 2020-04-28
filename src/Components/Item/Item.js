@@ -6,8 +6,8 @@ import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import { connect } from 'react-redux';
-import * as actions from '../store/actions/action-exams';
-import Spinner from "./UI/Spinner";
+import * as actions from '../../store/actions/action-exams';
+import Spinner from "../Spinner/Spinner";
 import uuid from "uuid";
 import { Link } from "react-router-dom";
 

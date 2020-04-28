@@ -6,7 +6,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import Spinner from "./UI/Spinner";
+import Spinner from "../Spinner/Spinner";
 
 class List extends Component {
 

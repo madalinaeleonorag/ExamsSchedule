@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import List from "./Components/List";
-import Item from "./Components/Item";
+import List from "./Components/List/List";
+import Item from "./Components/Item/Item";
+import Agenda from "./Components/Agenda/Agenda";
 import { connect } from 'react-redux';
 import * as actions from './store/actions/action-exams';
 
@@ -32,6 +33,9 @@ class App extends Component {
         <Switch>
           <Route path="/List">
             <List data={this.props.exms} />
+          </Route>
+          <Route path="/Agenda">
+            <Agenda data={this.props.exms} />
           </Route>
           <Route exact path="/Item/:id" component={Item}/>
         </Switch>

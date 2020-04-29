@@ -1,0 +1,19 @@
+.MuiGridListTile-root:nth-child(2n+1) {
+    background-color: #F1F3FFFF;
+}
+.exams-grid-materie {
+    margin: 10px;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+.exams-grid-text {
+    text-align: center;
+}
+.exams-grid-dataExamen {
+    margin: 10px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: darkred;
+}

@@ -34,25 +34,27 @@ const Filters = (props) => {
                 {(activeStep === 0) && <div>
                     <InputLabel>Year of study</InputLabel>
                     <Select
-                        defaultValue="I"
+                        defaultValue="all"
                         onChange={handleInputChange}
                         name="anStudiu"
                     >
                         <MenuItem value="I">I</MenuItem>
                         <MenuItem value="II">II</MenuItem>
                         <MenuItem value="III">III</MenuItem>
+                        <MenuItem value="all">All</MenuItem>
                     </Select>
                 </div>
                 }
                 {(activeStep === 1) && <div>
                     <InputLabel>Select exams period</InputLabel>
                     <Select
-                        defaultValue="summer"
+                        defaultValue="both"
                         onChange={handleInputChange}
                         name="sesiune"
                     >
                         <MenuItem value="summer">Summer</MenuItem>
                         <MenuItem value="winter">Winter</MenuItem>
+                        <MenuItem value="all">All</MenuItem>
                     </Select>
                 </div>
                 }

@@ -1,23 +1,45 @@
 import React, { Component } from 'react';
 import Filters from './Filters';
 import ExamsGrid from './ExamsGrid';
-import Spinner from '../Spinner/Spinner';
 
 class Agenda extends Component {
-  render() {
-    if(this.props.data){
-      return (
-     
-        <div>
-          <Filters data={this.props.data}></Filters>
-          <ExamsGrid data={this.props.data}></ExamsGrid>
-        </div>
-      );
-    }else{
-      return <Spinner></Spinner>
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      allData: [],
+      filteredData: []
     }
-  
   }
+
+  componentDidUpdate() {
+    if (!this.state.allData.length) {
+      this.setState({
+        allData: this.props.data,
+        filteredData: this.props.data
+      })
+    }
+  }
+
+   search(exam){
+    return Object.keys(this).every((key) => exam[key] === this[key]);
+  }
+
+  applyFilters = ( filter ) => {
+    this.setState({
+      filteredData: [...this.state.allData.filter(this.search, filter)]
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Filters applyFilters={this.applyFilters}></Filters>
+        <ExamsGrid data={this.state.filteredData}></ExamsGrid>
+      </div>
+    );
+  }
+
+
 }
 
 export default Agenda;

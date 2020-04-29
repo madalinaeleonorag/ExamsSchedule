@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -10,6 +10,19 @@ import "./Filters.css";
 
 const Filters = (props) => {
     const [activeStep, setActiveStep] = useState(0);
+    const [anStudiu, setYear] = useState('all');
+    const [sesiune, setPeriod] = useState('all');
+
+    useEffect(() => {
+        const filters = {
+            ...(anStudiu !== "all") && {anStudiu},
+            ...(sesiune !== 'all') && {sesiune},
+          }
+         if(Object.keys(filters).length){
+            props.applyFilters(filters);
+         }
+    }, [anStudiu, sesiune]);
+
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -19,7 +32,11 @@ const Filters = (props) => {
     };
 
     const handleInputChange = (event) => {
-        console.log(event.target.value);
+        if (event.target.name === "anStudiu") {
+            setYear(event.target.value);
+        } else if (event.target.name === "sesiune") {
+            setPeriod(event.target.value);
+        }
     };
 
     return (
@@ -28,27 +45,25 @@ const Filters = (props) => {
                 {(activeStep === 0) && <div>
                     <InputLabel>Year of study</InputLabel>
                     <Select
-                        defaultValue="all"
+                        value={anStudiu}
                         onChange={handleInputChange}
                         name="anStudiu"
                     >
                         <MenuItem value="I">I</MenuItem>
                         <MenuItem value="II">II</MenuItem>
                         <MenuItem value="III">III</MenuItem>
-                        <MenuItem value="all">All</MenuItem>
                     </Select>
                 </div>
                 }
                 {(activeStep === 1) && <div>
                     <InputLabel>Select exams period</InputLabel>
                     <Select
-                        defaultValue="both"
+                        value={sesiune}
                         onChange={handleInputChange}
                         name="sesiune"
                     >
                         <MenuItem value="summer">Summer</MenuItem>
                         <MenuItem value="winter">Winter</MenuItem>
-                        <MenuItem value="all">All</MenuItem>
                     </Select>
                 </div>
                 }

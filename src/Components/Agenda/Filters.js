@@ -9,13 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import "./Filters.css";
 
 const Filters = (props) => {
-    console.log(props)
-
-
     const [activeStep, setActiveStep] = useState(0);
-    const [currency, setCurrency] = React.useState('EUR');
-
-
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };

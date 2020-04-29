@@ -13,7 +13,7 @@ const Filters = (props) => {
 
 
     const [activeStep, setActiveStep] = useState(0);
-    const [currency, setCurrency] = React.useState('EUR');
+    // const [currency, setCurrency] = React.useState('EUR');
 
 
     const handleNext = () => {

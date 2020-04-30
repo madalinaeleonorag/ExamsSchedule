@@ -40,7 +40,7 @@ const Filters = (props) => {
     };
 
     return (
-        <div>
+        <div className="stepper-filters">
             <form noValidate autoComplete="off">
                 {(activeStep === 0) && <div>
                     <InputLabel>Year of study</InputLabel>

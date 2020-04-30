@@ -34,9 +34,7 @@ class App extends Component {
           <Route path="/List">
             <List data={this.props.exms} />
           </Route>
-          <Route path="/Agenda">
-            <Agenda data={this.props.exms} />
-          </Route>
+          <Route path="/Agenda" component={Agenda}/>
           <Route exact path="/Item/:id" component={Item}/>
         </Switch>
       </Router>

@@ -8,7 +8,7 @@ import Select from "@material-ui/core/Select";
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/action-exams';
 import Spinner from "../Spinner/Spinner";
-import uuid from "uuid";
+// import uuid from "uuid";
 import { Link } from "react-router-dom";
 
 class Item extends Component {
@@ -20,7 +20,7 @@ class Item extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
     this.id = this.props.match.params.id;
   }
 
@@ -33,16 +33,17 @@ class Item extends Component {
     })
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.setState({
-      currentExam: {
-        ...this.state.currentExam,
-        id: uuid.v4()
-      },
-      disabled: false
-    }, () => this.saveNewItem());
-  }
+  // handleSubmit(event) {
+  //   event.preventDefault();
+    
+  //   this.setState({
+  //     currentExam: {
+  //       ...this.state.currentExam,
+  //       id: uuid.v4()
+  //     },
+  //     disabled: false
+  //   }, () => this.saveNewItem());
+  // }
 
   componentDidMount() {
     this.setState({
@@ -66,7 +67,7 @@ class Item extends Component {
     let exam = this.props.exms;
     if (this.props.exms || this.id === 'new') {
       return (
-        <form className="exams-form" noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+        <form className="exams-form" noValidate autoComplete="off">
           <InputLabel>Select academic year</InputLabel>
           <Select
             defaultValue={exam ? exam.anUniversitar : ""}
@@ -135,7 +136,7 @@ class Item extends Component {
           />
 
           {this.id === "new" && (
-            <Button type="submit" variant="contained" color="primary"  disabled={this.state.disabled}>
+            <Button variant="contained" color="primary"  disabled={this.state.disabled} onClick={this.saveNewItem}>
               Save new item
           </Button>
           )}

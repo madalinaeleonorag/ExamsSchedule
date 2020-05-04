@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 
 class List extends Component {
-
   render() {
     if (this.props.data) {
       return (

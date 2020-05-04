@@ -3,13 +3,11 @@ import "./ExamsGrid.css";
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-// import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 
 class ExamsGrid extends Component {
     render() {
-        console.log(this)
         return (
             <div>
                 <GridList cellHeight={200} cols={3}>

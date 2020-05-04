@@ -9,22 +9,8 @@ class Agenda extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allData: [],
-      filteredData: []
-    }
-    console.log(this.props.data,"constructor");
-  }
-
-  componentDidMount() {
-    console.log(this.props.data, "did mount");
-  }
-  componentDidUpdate() {
-    console.log(this.props.data,"update");
-    if (!this.state.allData.length) {
-      this.setState({
-        allData: this.props.data,
-        filteredData: this.props.data
-      })
+      allData: this.props.data,
+      filteredData: this.props.data.filter(item => item.anUniversitar === this.currentUniversityYear())
     }
   }
 
@@ -38,16 +24,16 @@ class Agenda extends Component {
     });
   }
 
-  currentUnivesityYear = () => {
+  currentUniversityYear = () => {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
     let currentUniversityYear = "";
     if (currentMonth > 9) {
-      currentUniversityYear = `${currentYear} - ${currentYear + 1}`;
+      currentUniversityYear = `${currentYear}-${currentYear + 1}`;
 
     } else {
-      currentUniversityYear = `${currentYear - 1} - ${currentYear}`;
+      currentUniversityYear = `${currentYear - 1}-${currentYear}`;
     }
     return currentUniversityYear;
   }
@@ -55,7 +41,7 @@ class Agenda extends Component {
   render() {
     return (
       <div>
-        <Archive currentUniversityYear={this.currentUnivesityYear()}></Archive>
+        <Archive currentUniversityYear={this.currentUniversityYear()}></Archive>
         <Filters applyFilters={this.applyFilters}></Filters>
         <ExamsGrid data={this.state.filteredData}></ExamsGrid>
       </div>

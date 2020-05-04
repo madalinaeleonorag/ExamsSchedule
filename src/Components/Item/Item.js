@@ -148,7 +148,7 @@ class Item extends Component {
               <Button variant="contained" color="primary"  
               onClick={this.removeItem} 
               component={Link}
-              to="/List">
+              to="/ListComponent">
                 Remove item
             </Button>
             </div>

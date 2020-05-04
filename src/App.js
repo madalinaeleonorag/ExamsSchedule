@@ -7,6 +7,7 @@ import Agenda from "./Components/Agenda/Agenda";
 import { connect } from 'react-redux';
 import * as actions from './store/actions/action-exams';
 import Spinner from "./Components/Spinner/Spinner";
+import Login from "./Components/Login/Login";
 
 class App extends Component {
 
@@ -19,10 +20,11 @@ class App extends Component {
       return (
         <Router>
           <Switch>
-            <Route path="/List">
+            <Route exact path="/" component={Login}/>
+            <Route exact path="/List">
               <List data={this.props.exms} />
             </Route>
-            <Route path="/Agenda" component={Agenda}/>
+            <Route exact path="/Agenda" component={Agenda}/>
             <Route exact path="/Item/:id" component={Item}/>
           </Switch>
         </Router>

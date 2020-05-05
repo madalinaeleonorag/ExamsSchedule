@@ -55,8 +55,7 @@ export const removeExam = (examId) => {
 
 export const addExam = (newExam) => {
   database.saveNewItem(newExam);
-  return {
-    type: actionTypes.ADD_EXAM,
-    addedExam: newExam,
+  return () => {
+    initExams();
   };
 };

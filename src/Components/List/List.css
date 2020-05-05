@@ -1,0 +1,52 @@
+.list-container {
+    display:flex;
+    flex-direction: column;
+}
+.MuiButton-root.add-new-button {
+    margin: 20px 50px;
+    align-self: flex-end;
+}
+.MuiExpansionPanelDetails-root {
+    flex-direction: column;
+}
+.MuiExpansionPanel-root {
+    padding: 10px 34px;
+}
+.list-bar{
+    background-color: #fafafa;
+    padding: 30px 50px;
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.year-title {
+    font-size: 28px;
+}
+.MuiExpansionPanel-root .second-panels{
+    background:#fafafa;
+    width: 70%;
+}
+.MuiExpansionPanel-root .third-panels{
+    width: 70%;
+}
+.third-panels .MuiExpansionPanelSummary-content {
+    font-size: 20px;
+    font-weight: bold;
+}
+.third-panels .MuiExpansionPanelDetails-root *{
+    font-size: 16px;
+    padding: 7px 0;
+
+}
+.third-panels .MuiExpansionPanelDetails-root a{
+    margin: 10px 0;
+    padding: 0;
+    width: 25%;
+    align-self: flex-end;
+}
+@media screen and (max-width: 900px) {
+    .MuiExpansionPanel-root .second-panels,
+    .MuiExpansionPanel-root .third-panels {
+        width: 90%;
+    }
+}

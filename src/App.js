@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import ListComponent from "./Components/List/ListComponent";
+import List from "./Components/List/List";
 import Item from "./Components/Item/Item";
 import Agenda from "./Components/Agenda/Agenda";
 import { connect } from 'react-redux';

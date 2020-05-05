@@ -20,11 +20,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         exams: [...state.exams.filter(item =>  item.id !== action.removedExamId)]
       };
-      case actionTypes.ADD_EXAM:
-      return {
-        ...state,
-        exams: [...state.exams, action.addedExam]
-      };
     default:
       return state;
   }

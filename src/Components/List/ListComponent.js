@@ -15,18 +15,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import ListItemText from "@material-ui/core/ListItemText";
 import Spinner from "../Spinner/Spinner";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-}));
-
-class ListComponent extends Component {
+class List extends Component {
   render() {
     const handleClick = () => {
       setOpen(!open);

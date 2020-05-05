@@ -47,8 +47,6 @@ class Agenda extends Component {
       </div>
     );
   }
-
-
 }
 const mapStateToProps = state => {
   return {

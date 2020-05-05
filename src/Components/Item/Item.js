@@ -125,19 +125,16 @@ class Item extends Component {
           />
 
           {this.id === "new" && (
-            <Button variant="contained" color="primary"  disabled={this.state.disabled} onClick={this.saveNewItem}>
+            <Button color="primary"  disabled={this.state.disabled} onClick={this.saveNewItem}>
               Save new item
           </Button>
           )}
           {this.id !== "new" && (
             <div>
-              <Button variant="contained" color="primary"  onClick={this.saveItem}>
+              <Button color="primary"  onClick={this.saveItem}>
                 Save item
             </Button>
-              <Button variant="contained" color="primary"  
-              onClick={this.removeItem} 
-              component={Link}
-              to="/List">
+              <Button color="primary" onClick={this.removeItem} component={Link} to="/List">
                 Remove item
             </Button>
             </div>

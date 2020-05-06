@@ -16,6 +16,8 @@ function List(props) {
     count = 0;
   }
 
+  
+
   return (
     <div className="list-container">
       <div className="list-bar">

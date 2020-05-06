@@ -17,3 +17,10 @@ export const updateCurrentUser = (currentUserUID) => {
       })
     }
   }
+
+  export const logOut = () => {
+    return {
+      type: actionTypes.LOGIN,
+      user: null
+    }
+  }

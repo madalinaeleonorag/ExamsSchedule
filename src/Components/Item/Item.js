@@ -159,7 +159,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onUpdateExam: (currentExam) => dispatch(actions.updateExam(currentExam)),
     onRemoveExam: (currentExamId) => dispatch(actions.removeExam(currentExamId)),
-    onAddNewExam: (newExam) => dispatch(actions.addExam(newExam)),
+    onAddNewExam: (newExam) => dispatch(actions.addExam(newExam))
   }
 }
 

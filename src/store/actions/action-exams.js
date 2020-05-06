@@ -9,7 +9,7 @@ export const setExams = (exams) => {
 };
 export const initExams = () => {
   return (dispatch) => {
-    database.get().on(
+    database.get().once(
       "value",
       (snap) => {
         let items = [];
@@ -54,8 +54,14 @@ export const removeExam = (examId) => {
 };
 
 export const addExam = (newExam) => {
-  database.saveNewItem(newExam);
-  return () => {
-    initExams();
-  };
+  database
+    .saveNewItem(newExam)
+    .then((res) => {
+      newExam.id = res.key;
+      return {
+        type: actionTypes.ADD_EXAM,
+        addedExam: newExam,
+      };
+    })
+    .catch((err) => console.log(err));
 };

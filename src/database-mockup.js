@@ -2,7 +2,6 @@ import * as firebase from "firebase";
 import * as moment from "moment";
 
 export function get() {
-  console.log(firebase.database().ref("exams/"))
   return firebase.database().ref("exams/");
 }
 
@@ -40,4 +39,10 @@ export function removeItem(id) {
     .database()
     .ref("exams/" + id)
     .remove();
+}
+
+export function signin(loginInformations) {
+  return firebase
+  .auth()
+  .signInWithEmailAndPassword(loginInformations.email, loginInformations.password)
 }

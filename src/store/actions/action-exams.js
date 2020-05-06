@@ -7,6 +7,7 @@ export const setExams = (exams) => {
     exams: exams,
   };
 };
+
 export const initExams = () => {
   return (dispatch) => {
     database.get().once(

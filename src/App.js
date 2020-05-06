@@ -6,6 +6,7 @@ import Item from "./Components/Item/Item";
 import Agenda from "./Components/Agenda/Agenda";
 import { connect } from 'react-redux';
 import * as actions from './store/actions/action-exams';
+import * as actionsAuth from './store/actions/action-authentication';
 import Spinner from "./Components/Spinner/Spinner";
 import Login from "./Components/Login/Login";
 
@@ -13,6 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.onInitExams();
+    this.props.onInitUser();
   }
 
   render() {
@@ -38,13 +40,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    exms: state.exams,
+    exms: state.exams
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onInitExams: () => dispatch(actions.initExams()),
+    onInitUser: () => dispatch(actionsAuth.initUser())
   }
 }
 

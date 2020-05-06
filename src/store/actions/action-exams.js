@@ -54,14 +54,17 @@ export const removeExam = (examId) => {
 };
 
 export const addExam = (newExam) => {
-  database
+  return (dispatch) => {
+    database
     .saveNewItem(newExam)
     .then((res) => {
       newExam.id = res.key;
-      return {
+      dispatch( {
         type: actionTypes.ADD_EXAM,
         addedExam: newExam,
-      };
+      });
     })
     .catch((err) => console.log(err));
+  }
+ 
 };

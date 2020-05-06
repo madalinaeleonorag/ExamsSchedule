@@ -41,6 +41,7 @@ class Item extends Component {
     this.setState({
       disabled: true
     });
+    console.log(this.state.currentExam, "currentExam from item");
     this.props.onAddNewExam(this.state.currentExam);
   }
 
@@ -56,7 +57,7 @@ class Item extends Component {
     let exam = this.props.exms;
     if (this.props.exms || this.id === 'new') {
       return (
-        <form className="exams-form" noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+        <form className="exams-form" noValidate autoComplete="off">
           <InputLabel>Select academic year</InputLabel>
           <Select
             defaultValue={exam ? exam.anUniversitar : ""}

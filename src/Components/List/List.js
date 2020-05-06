@@ -22,7 +22,7 @@ class List extends Component {
               disableElevation
             >
               Add new item
-      </Button>
+            </Button>
           </div>
           <h1>Courses</h1>
 
@@ -34,7 +34,7 @@ class List extends Component {
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  {item.materie}
+                  {item.id}
                   <br />
                   {"An " + item.anStudiu} - {item.sectie}
                 </ExpansionPanelSummary>
@@ -47,7 +47,7 @@ class List extends Component {
                     disableElevation
                   >
                     Edit item
-            </Button>
+                  </Button>
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             );
@@ -55,7 +55,7 @@ class List extends Component {
         </div>
       );
     } else {
-      return <Spinner></Spinner>
+      return <Spinner></Spinner>;
     }
   }
 }

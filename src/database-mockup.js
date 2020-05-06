@@ -1,6 +1,8 @@
 import * as firebase from "firebase";
+import * as moment from "moment";
 
 export function get() {
+  console.log(firebase.database().ref("exams/"))
   return firebase.database().ref("exams/");
 }
 
@@ -13,8 +15,8 @@ export function saveNewItem(data) {
     nrLocuri: data.nrLocuri,
     materie: data.materie,
     profesor: data.profesor,
-    dataExamen: data.dataExamen,
-  });
+    dataExamen: data.dataExamen ? data.dataExamen : moment().format('YYYY-MM-DD'),
+  })
 }
 
 export function saveEdits(data) {

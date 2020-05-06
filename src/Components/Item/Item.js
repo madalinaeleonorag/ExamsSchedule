@@ -8,6 +8,7 @@ import Select from "@material-ui/core/Select";
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/action-exams';
 import Spinner from "../Spinner/Spinner";
+import * as database from "../../database-mockup";
 // import uuid from "uuid";
 import { Link } from "react-router-dom";
 
@@ -52,7 +53,7 @@ class Item extends Component {
   }
 
   saveNewItem = () => {
-    this.props.onAddNewExam(this.state.currentExam);
+    database.saveNewItem(this.state.currentExam);
   }
 
   saveItem = () => {
@@ -173,7 +174,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onUpdateExam: (currentExam) => dispatch(actions.updateExam(currentExam)),
     onRemoveExam: (currentExamId) => dispatch(actions.removeExam(currentExamId)),
-    onAddNewExam: (newExam) => dispatch(actions.addExam(newExam)),
+    onAddNewExam: (newExam) => dispatch(actions.addExam(newExam))
   }
 }
 

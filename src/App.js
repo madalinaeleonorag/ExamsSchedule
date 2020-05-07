@@ -23,7 +23,7 @@ class App extends Component {
       .signout()
       .then((res) => {
         // TODO redirect to login
-        // this.props.router.push('/');
+        this.props.history.push('');
         this.props.onSignOutUser();
       })
       .catch((err) => {

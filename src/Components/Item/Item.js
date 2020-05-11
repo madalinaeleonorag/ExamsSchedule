@@ -41,7 +41,6 @@ class Item extends Component {
     this.setState({
       disabled: true
     });
-    console.log(this.state.currentExam, "currentExam from item");
     this.props.onAddNewExam(this.state.currentExam);
   }
 

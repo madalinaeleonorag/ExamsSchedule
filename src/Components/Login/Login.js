@@ -2,44 +2,120 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import "./Login.css";
-import TextField from '@material-ui/core/TextField';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import TextField from "@material-ui/core/TextField";
+import * as database from "../../database-mockup";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/action-authentication";
 
 class Login extends Component {
-    render() {
-        return (
-            <div className="login-page">
-                <div className="login-container">
-                    <div className="login-title">Login</div>
-                    <form className="login-form" noValidate autoComplete="off">
-                        <TextField
-                            required
-                            id="filled-required"
-                            label="Email"
-                            variant="filled"
-                        />
-                        <TextField
-                            required
-                            id="filled-password-input"
-                            label="Password"
-                            type="password"
-                            autoComplete="current-password"
-                            variant="filled"
-                        />
-                        <Button color="primary">Log in</Button>
-                    </form>
-                    <div className="no-account">
-                        <span>if you don't have an account</span>
-                        <ArrowForwardIcon />
-                        <Button color="primary" component={Link} to="/Agenda">
-                            See your timetable
-                        </Button>
-                    </div>
-                </div>
+  state = {
+    disabled: false,
+    loginInformations: {},
+    errorLogin: null
+  };
 
-            </div>
-        );
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      loginInformations: {
+        ...this.state.loginInformations,
+        [event.target.name]: event.target.value,
+      },
+    });
+  }
+
+  componentDidMount () {
+    console.log('mount')
+    if (this.props.user) {
+      console.log('props', this.props.user)
+      this.props.history.push('/Agenda');
     }
+  }
+
+  login = () => {
+    database
+      .signin(this.state.loginInformations)
+      .then(res => {
+          this.props.history.push('/Agenda')
+          database.getUserByID(res.user.uid).on(
+            "value",
+            (snap) => {
+              let details = snap.val();
+              details.uid = res.user.uid;
+              this.props.onSignInUser(details);
+            })
+
+      })
+      .catch((err) => {
+        this.setState({
+            errorLogin: err.message
+          });
+      });
+  };
+
+  render() {
+    return (
+      <div className="login-page">
+        <div className="login-container">
+          <div className="login-title">Login</div>
+          <form className="login-form" noValidate autoComplete="off">
+            <TextField
+              required
+              id="filled-required"
+              label="Email"
+              variant="filled"
+              name="email"
+              onChange={this.handleInputChange}
+            />
+            <TextField
+              required
+              id="filled-password-input"
+              label="Password"
+              type="password"
+              name="password"
+              onChange={this.handleInputChange}
+              autoComplete="current-password"
+              variant="filled"
+            />
+            <div>{this.state.errorLogin}</div>
+            <Button
+              color="primary"
+              disabled={this.state.disabled}
+              onClick={this.login}
+            >
+              Log in
+            </Button>
+          </form>
+
+          <div className="no-account">
+            <span>if you don't have an account</span>
+            <ArrowForwardIcon />
+            <Button color="primary" component={Link} to="/Agenda">
+              See your timetable
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSignInUser: (currentUserUID) =>
+      dispatch(actions.updateCurrentUser(currentUserUID)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

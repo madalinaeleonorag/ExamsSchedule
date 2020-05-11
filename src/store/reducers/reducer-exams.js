@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  exams: null
+  exams: null,
+  user: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +16,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         exams: [...state.exams.map(item => (item.id === action.updatedExam.id) ? action.updatedExam : item)]
       };
+      case actionTypes.LOGIN: {
+        return {
+          ...state,
+          user: action.user
+        };
+      }
     case actionTypes.REMOVE_EXAM:
       return {
         ...state,

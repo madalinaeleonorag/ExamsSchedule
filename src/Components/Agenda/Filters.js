@@ -33,7 +33,7 @@ const Filters = (props) => {
 
     const handleInputChange = (event) => {
         const newFilter = { key: event.target.name, label: event.target.value };
-        const isAlreadySet = filtersInfo.some(item => item.key == newFilter.key);
+        const isAlreadySet = filtersInfo.some(item => item.key === newFilter.key);
         let infos = [];
         if (isAlreadySet) {
             infos = [...filtersInfo.map(item => item.key === event.target.name ? { ...item, label: event.target.value } : item)]

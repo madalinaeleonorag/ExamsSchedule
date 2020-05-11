@@ -20,7 +20,6 @@ function List(props) {
     <div className="list-container">
       <div className="list-bar">
         All scheduled exams
-      <Button color="primary" >Log out</Button>
       </div>
 
       <Button className="add-new-button" color="primary" component={Link} to="/Item/new">

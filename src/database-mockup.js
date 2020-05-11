@@ -58,3 +58,7 @@ export function signin(loginInformations) {
 export function signout() {
   return firebase.auth().signOut();
 }
+
+export const getUserByID = (userID) => {
+  firebase.database().ref(`Users/${userID}`)
+}

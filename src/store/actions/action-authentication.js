@@ -13,6 +13,13 @@ export const updateCurrentUser = (currentUserUID) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           dispatch(updateCurrentUser(user.uid))
+          firebase.database().ref(`Users/${user.uid}`).on(
+            "value",
+            (snap) => {
+              let details = snap.val();
+              details.uid = user.uid;
+              dispatch(updateCurrentUser(details))
+            })
         }
       })
     }

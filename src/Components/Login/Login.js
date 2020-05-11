@@ -30,7 +30,9 @@ class Login extends Component {
   }
 
   componentDidMount () {
+    console.log('mount')
     if (this.props.user) {
+      console.log('props', this.props.user)
       this.props.history.push('/Agenda');
     }
   }
@@ -40,10 +42,16 @@ class Login extends Component {
       .signin(this.state.loginInformations)
       .then(res => {
           this.props.history.push('/Agenda')
-        this.props.onSignInUser(res.user.uid);
+          database.getUserByID(res.user.uid).on(
+            "value",
+            (snap) => {
+              let details = snap.val();
+              details.uid = res.user.uid;
+              this.props.onSignInUser(details);
+            })
+
       })
       .catch((err) => {
-        // TODO add error to user when receive error not when we try to type again in form input
         this.setState({
             errorLogin: err.message
           });

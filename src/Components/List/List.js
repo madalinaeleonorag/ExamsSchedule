@@ -4,8 +4,8 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+// import Button from "@material-ui/core/Button";
+// import { Link } from "react-router-dom";
 
 function List(props) {
   const allYearsOfUniversity = [...new Set(props.data.map(item => item.anUniversitar))].sort();
@@ -22,9 +22,9 @@ function List(props) {
         All scheduled exams
       </div>
 
-      <Button className="add-new-button" color="primary" component={Link} to="/Item/new">
+      {/* <Button className="add-new-button" color="primary" component={Link} to="/Item/new">
         Add new item
-      </Button>
+      </Button> */}
 
       {allYearsOfUniversity.map((universityYear) => {
         return <ExpansionPanel key={universityYear}>
@@ -53,9 +53,9 @@ function List(props) {
                             <div>{`Department: ${item.sectie}`}</div>
                             <div>{`Session: ${item.sesiune}`}</div>
                             <div>{`Number of students: ${item.nrLocuri} `}</div>
-                            <Button color="primary" component={Link} to={`/Item/${item.id}`}>
+                            {/* <Button color="primary" component={Link} to={`/Item/${item.id}`}>
                               Edit item
-                            </Button>
+                            </Button> */}
                           </ExpansionPanelDetails>
                         </ExpansionPanel>
                       );

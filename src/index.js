@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './store/reducers/reducer-exams';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import './index.css';
+import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as firebase from "firebase";

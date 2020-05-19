@@ -4,12 +4,17 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-// import Button from "@material-ui/core/Button";
-// import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 function List(props) {
-  const allYearsOfUniversity = [...new Set(props.data.map(item => item.anUniversitar))].sort();
-  const allYearsOfStudy = [...new Set(props.data.map(item => item.anStudiu))].sort();
+  const allYearsOfUniversity = [
+    ...new Set(props.data.map((item) => item.anUniversitar)),
+  ].sort();
+  const allYearsOfStudy = [
+    ...new Set(props.data.map((item) => item.anStudiu)),
+  ].sort();
 
   let count = 0;
   function resetCounter() {
@@ -18,60 +23,105 @@ function List(props) {
 
   return (
     <div className="list-container">
-      <div className="list-bar">
-        All scheduled exams
-      </div>
+      <div className="list-bar">All scheduled exams</div>
 
-      {/* <Button className="add-new-button" color="primary" component={Link} to="/Item/new">
-        Add new item
-      </Button> */}
+      {props.user ? (
+        <Button
+          className="add-new-button"
+          color="primary"
+          component={Link}
+          to="/Item/new"
+        >
+          Add new item
+        </Button>
+      ) : (
+        ""
+      )}
 
       {allYearsOfUniversity.map((universityYear) => {
-        return <ExpansionPanel key={universityYear}>
-          <ExpansionPanelSummary className="year-title">
-            {universityYear}
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-
-            {allYearsOfStudy.map((studyYear) => {
-              return <ExpansionPanel className="second-panels" key={studyYear}>
-                <ExpansionPanelSummary className="year-title">
-                  {studyYear}
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  {resetCounter()}
-                  {props.data.map((item) => {
-                    if (item.anUniversitar === universityYear && item.anStudiu === studyYear) {
-                      count++;
-                      return (
-                        <ExpansionPanel className="third-panels" key={item.id}>
-                          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <div>{item.materie} - {new Date(item.dataExamen).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
-                          </ExpansionPanelSummary>
-                          <ExpansionPanelDetails>
-                            <div>{`Teacher: ${item.profesor}`}</div>
-                            <div>{`Department: ${item.sectie}`}</div>
-                            <div>{`Session: ${item.sesiune}`}</div>
-                            <div>{`Number of students: ${item.nrLocuri} `}</div>
-                            {/* <Button color="primary" component={Link} to={`/Item/${item.id}`}>
-                              Edit item
-                            </Button> */}
-                          </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                      );
-                    }
-                  })}
-                  <br />
-                  {`Total results found: ${count}`}
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-            })}
-
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
+        return (
+          <ExpansionPanel key={universityYear}>
+            <ExpansionPanelSummary className="year-title">
+              {universityYear}
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              {allYearsOfStudy.map((studyYear) => {
+                return (
+                  <ExpansionPanel className="second-panels" key={studyYear}>
+                    <ExpansionPanelSummary className="year-title">
+                      {studyYear}
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      {resetCounter()}
+                      {props.data.map((item) => {
+                        if (
+                          item.anUniversitar === universityYear &&
+                          item.anStudiu === studyYear
+                        ) {
+                          count++;
+                          return (
+                            <ExpansionPanel
+                              className="third-panels"
+                              key={item.id}
+                            >
+                              <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon />}
+                              >
+                                <div>
+                                  {item.materie} -{" "}
+                                  {new Date(
+                                    item.dataExamen
+                                  ).toLocaleString("default", {
+                                    month: "long",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  })}
+                                </div>
+                              </ExpansionPanelSummary>
+                              <ExpansionPanelDetails>
+                                <div>{`Teacher: ${item.profesor}`}</div>
+                                <div>{`Department: ${item.sectie}`}</div>
+                                <div>{`Session: ${item.sesiune}`}</div>
+                                <div>{`Number of students: ${item.nrLocuri} `}</div>
+                                {props.user ? (
+                                  <Button
+                                    color="primary"
+                                    component={Link}
+                                    to={`/Item/${item.id}`}
+                                  >
+                                    Edit item
+                                  </Button>
+                                ) : (
+                                  ""
+                                )}
+                              </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                          );
+                        }
+                      })}
+                      <br />
+                      {`Total results found: ${count}`}
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                );
+              })}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        );
       })}
     </div>
   );
 }
 
-export default List;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

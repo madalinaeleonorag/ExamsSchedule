@@ -7,6 +7,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Logout from "../Logout/Logout";
 
 function List(props) {
   const allYearsOfUniversity = [
@@ -23,6 +24,7 @@ function List(props) {
 
   return (
     <div className="list-container">
+     <Logout></Logout>
       <div className="list-bar">All scheduled exams</div>
 
       {props.user ? (

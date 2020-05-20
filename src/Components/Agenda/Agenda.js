@@ -3,6 +3,7 @@ import Filters from './Filters';
 import ExamsGrid from './ExamsGrid';
 import Archive from "./Archive";
 import { connect } from 'react-redux';
+import Logout from '../Logout/Logout';
 
 class Agenda extends Component {
 
@@ -41,6 +42,7 @@ class Agenda extends Component {
   render() {
     return (
       <div>
+        <Logout></Logout>
         <Archive currentUniversityYear={this.currentUniversityYear()}></Archive>
         <Filters applyFilters={this.applyFilters}></Filters>
         <ExamsGrid data={this.state.filteredData}></ExamsGrid>

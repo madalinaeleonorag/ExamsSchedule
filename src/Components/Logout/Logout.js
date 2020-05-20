@@ -25,17 +25,19 @@ class Logout extends React.Component {
 
     render() {
         const { redirect } = this.state;
+        const { user } = this.props;
         if (redirect) {
             return <Redirect to='/' />;
+        } else if (user) {
+            return (
+                <div className="logout-button">
+                    <Button color="primary" onClick={this.logout}>
+                        Log out
+                    </Button>
+                </div>
+            )
         }
-        return (
-            <div className="logout-button">
-                {this.props.user ? <Button color="primary" onClick={this.logout}>
-                    Log out
-          </Button> : ''}
-            </div>
-
-        );
+        return <span></span>
     }
 
 }

@@ -9,11 +9,12 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/action-exams';
 import Spinner from "../Spinner/Spinner";
 import { Link } from "react-router-dom";
+import { thisExpression } from "@babel/types";
 
 class Item extends Component {
   state = {
-    disabled: false,
-    currentExam: {}
+    disabled: true,
+    currentExam: {},
   }
 
   constructor(props) {
@@ -28,13 +29,26 @@ class Item extends Component {
         ...this.state.currentExam,
         [event.target.name]: event.target.value
       }
-    })
+    }, () => {
+      let count = 0;
+      if (Object.keys(this.state.currentExam).length == 7) {
+        Object.keys(this.state.currentExam).forEach(() => {
+          count++;
+        });
+        if (count == 7) {
+          this.setState({ disabled: false });
+        }
+      }
+    });
+
   }
 
   componentDidMount() {
-    this.setState({
-      currentExam: this.props.exms
-    })
+    if (this.props.exms) {
+      this.setState({
+        currentExam: this.props.exms
+      })
+    }
   }
 
   saveNewItem = () => {
@@ -65,6 +79,7 @@ class Item extends Component {
             defaultValue={exam ? exam.anUniversitar : ""}
             onChange={this.handleInputChange}
             name="anUniversitar"
+            required
           >
             <MenuItem value="2017-2018">2017-2018</MenuItem>
             <MenuItem value="2018-2019">2018-2019</MenuItem>
@@ -76,6 +91,7 @@ class Item extends Component {
             defaultValue={exam ? exam.sesiune : ""}
             onChange={this.handleInputChange}
             name="sesiune"
+            required
           >
             <MenuItem value="summer">Summer</MenuItem>
             <MenuItem value="winter">Winter</MenuItem>
@@ -86,6 +102,7 @@ class Item extends Component {
             defaultValue={exam ? exam.anStudiu : ""}
             onChange={this.handleInputChange}
             name="anStudiu"
+            required
           >
             <MenuItem value="I">I</MenuItem>
             <MenuItem value="II">II</MenuItem>
@@ -97,12 +114,14 @@ class Item extends Component {
             onChange={this.handleInputChange}
             name="sectie"
             defaultValue={exam ? exam.sectie : ""}
+            required
           />
           <TextField
             label="Subject"
             name="materie"
             onChange={this.handleInputChange}
             defaultValue={exam ? exam.materie : ""}
+            required
           />
 
           <TextField
@@ -111,6 +130,7 @@ class Item extends Component {
             name="nrLocuri"
             onChange={this.handleInputChange}
             defaultValue={exam ? exam.nrLocuri : ""}
+            required
           />
 
           <TextField
@@ -118,6 +138,7 @@ class Item extends Component {
             name="profesor"
             onChange={this.handleInputChange}
             defaultValue={exam ? exam.profesor : ""}
+            required
           />
 
           <TextField
@@ -128,13 +149,13 @@ class Item extends Component {
           />
 
           {this.id === "new" && (
-            <Button color="primary"  disabled={this.state.disabled} onClick={this.saveNewItem}>
+            <Button color="primary" disabled={this.state.disabled} onClick={this.saveNewItem}>
               Save new item
           </Button>
           )}
           {this.id !== "new" && (
             <div>
-              <Button color="primary"  onClick={this.saveItem}>
+              <Button color="primary" onClick={this.saveItem}>
                 Save item
             </Button>
               <Button color="primary" onClick={this.removeItem} component={Link} to="/List">

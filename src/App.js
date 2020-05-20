@@ -24,7 +24,7 @@ class App extends Component {
       .then((res) => {
         // TODO redirect to login
         this.props.onSignOutUser();
-        // this.props.history.push('/');
+        this.props.history.push('/');
       })
       .catch((err) => {
         // TODO add error to user when receive error
@@ -35,7 +35,7 @@ class App extends Component {
   render() {
     if (this.props.exms) {
       return (
-        <div> 
+        <div className="app-container"> 
           { this.props.user ? <Button color="primary" onClick={this.logout}>
         Log out
       </Button> : ''}

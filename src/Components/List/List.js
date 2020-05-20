@@ -47,7 +47,7 @@ function List(props) {
             <ExpansionPanelDetails>
               {allYearsOfStudy.map((studyYear) => {
                 return (
-                  <ExpansionPanel className="second-panels" key={studyYear}>
+                  <ExpansionPanel className="second-panel" key={studyYear}>
                     <ExpansionPanelSummary className="year-title">
                       {studyYear}
                     </ExpansionPanelSummary>
@@ -61,7 +61,7 @@ function List(props) {
                           count++;
                           return (
                             <ExpansionPanel
-                              className="third-panels"
+                              className="third-panel"
                               key={item.id}
                             >
                               <ExpansionPanelSummary

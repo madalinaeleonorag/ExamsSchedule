@@ -46,8 +46,16 @@ export const updateExam = (currentExam) => {
   };
 };
 
-export const removeExam = (examId) => {
-  database.removeItem(examId);
+export const removeExam = (examId, callback) => {
+  database.removeItem(examId)
+  .then(res => {
+    console.log(res);
+    return callback(res);
+  })
+  .catch(err => {
+    console.log(err);
+    return callback(err);
+  })
   return {
     type: actionTypes.REMOVE_EXAM,
     removedExamId: examId,

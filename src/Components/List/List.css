@@ -22,31 +22,21 @@
 .year-title {
     font-size: 28px;
 }
-.MuiExpansionPanel-root .second-panels{
+.MuiExpansionPanel-root .second-panel{
     background:#fafafa;
-    width: 70%;
 }
-.MuiExpansionPanel-root .third-panels{
-    width: 70%;
-}
-.third-panels .MuiExpansionPanelSummary-content {
+.third-panel .MuiExpansionPanelSummary-content {
     font-size: 20px;
     font-weight: bold;
 }
-.third-panels .MuiExpansionPanelDetails-root *{
+.third-panel .MuiExpansionPanelDetails-root *{
     font-size: 16px;
     padding: 7px 0;
 
 }
-.third-panels .MuiExpansionPanelDetails-root a{
+.third-panel .MuiExpansionPanelDetails-root a{
     margin: 10px 0;
     padding: 0;
     width: 25%;
     align-self: flex-end;
-}
-@media screen and (max-width: 900px) {
-    .MuiExpansionPanel-root .second-panels,
-    .MuiExpansionPanel-root .third-panels {
-        width: 90%;
-    }
 }

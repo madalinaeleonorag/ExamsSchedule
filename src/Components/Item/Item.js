@@ -49,9 +49,12 @@ class Item extends Component {
   }
 
   removeItem = () => {
-    this.props.onRemoveExam(this.state.currentExam.id);
+    this.props.onRemoveExam(this.state.currentExam.id, this.removeCallback);
   }
 
+  removeCallback = (response) => {
+    console.log(response);
+  }
   render() {
     let exam = this.props.exms;
     if (this.props.exms || this.id === 'new') {
@@ -158,7 +161,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     onUpdateExam: (currentExam) => dispatch(actions.updateExam(currentExam)),
-    onRemoveExam: (currentExamId) => dispatch(actions.removeExam(currentExamId)),
+    onRemoveExam: (currentExamId, removeCallback) => dispatch(actions.removeExam(currentExamId, removeCallback)),
     onAddNewExam: (newExam) => dispatch(actions.addExam(newExam))
   }
 }

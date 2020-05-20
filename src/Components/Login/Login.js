@@ -66,7 +66,7 @@ class Login extends Component {
               required
               id="filled-required"
               label="Email"
-              variant="filled"
+              variant="outlined"
               name="email"
               onChange={this.handleInputChange}
             />
@@ -78,9 +78,9 @@ class Login extends Component {
               name="password"
               onChange={this.handleInputChange}
               autoComplete="current-password"
-              variant="filled"
+              variant="outlined"
             />
-            <div>{this.state.errorLogin}</div>
+            <div className="login-error">{this.state.errorLogin}</div>
             <Button
               color="primary"
               disabled={this.state.disabled}

@@ -7,6 +7,7 @@ import * as database from "../../database-mockup";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/action-authentication";
+import Background from "../Background/Background";
 
 class Login extends Component {
   state = {
@@ -29,7 +30,7 @@ class Login extends Component {
     });
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.user) {
       // this.props.history.push('/Agenda');
     }
@@ -39,20 +40,20 @@ class Login extends Component {
     database
       .signin(this.state.loginInformations)
       .then(res => {
-          this.props.history.push('/Agenda')
-          database.getUserByID(res.user.uid).on(
-            "value",
-            (snap) => {
-              let details = snap.val();
-              details.uid = res.user.uid;
-              this.props.onSignInUser(details);
-            })
+        this.props.history.push('/Agenda')
+        database.getUserByID(res.user.uid).on(
+          "value",
+          (snap) => {
+            let details = snap.val();
+            details.uid = res.user.uid;
+            this.props.onSignInUser(details);
+          })
 
       })
       .catch((err) => {
         this.setState({
-            errorLogin: err.message
-          });
+          errorLogin: err.message
+        });
       });
   };
 
@@ -66,7 +67,6 @@ class Login extends Component {
               required
               id="filled-required"
               label="Email"
-              variant="outlined"
               name="email"
               onChange={this.handleInputChange}
             />
@@ -78,14 +78,12 @@ class Login extends Component {
               name="password"
               onChange={this.handleInputChange}
               autoComplete="current-password"
-              variant="outlined"
             />
             <div className="login-error">{this.state.errorLogin}</div>
             <Button
               color="primary"
               disabled={this.state.disabled}
-              onClick={this.login}
-            >
+              onClick={this.login}>
               Log in
             </Button>
           </form>
@@ -98,6 +96,7 @@ class Login extends Component {
             </Button>
           </div>
         </div>
+       <Background></Background>
       </div>
     );
   }

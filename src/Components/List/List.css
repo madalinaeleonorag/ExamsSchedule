@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 .MuiButton-root.add-new-button {
-    margin: 20px 50px;
+    margin: 20px;
     align-self: flex-end;
 }
 .MuiExpansionPanelDetails-root {
@@ -27,7 +27,6 @@
 }
 .third-panel .MuiExpansionPanelSummary-content {
     font-size: 20px;
-    font-weight: bold;
 }
 .third-panel .MuiExpansionPanelDetails-root *{
     font-size: 16px;
@@ -37,6 +36,5 @@
 .third-panel .MuiExpansionPanelDetails-root a{
     margin: 10px 0;
     padding: 0;
-    width: 25%;
-    align-self: flex-end;
+    width: fit-content;
 }

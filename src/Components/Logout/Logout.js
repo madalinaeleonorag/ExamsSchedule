@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import * as actionsAuth from "../../store/actions/action-authentication";
 import { Redirect } from 'react-router';
+import './Logout.css';
 
 class Logout extends React.Component {
     state = {
@@ -28,7 +29,7 @@ class Logout extends React.Component {
             return <Redirect to='/' />;
         }
         return (
-            <div>
+            <div className="logout-button">
                 {this.props.user ? <Button color="primary" onClick={this.logout}>
                     Log out
           </Button> : ''}

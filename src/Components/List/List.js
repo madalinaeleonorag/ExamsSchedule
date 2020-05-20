@@ -24,7 +24,7 @@ function List(props) {
 
   return (
     <div className="list-container">
-     <Logout></Logout>
+      <Logout></Logout>
       <div className="list-bar">All scheduled exams</div>
 
       {props.user ? (
@@ -37,8 +37,8 @@ function List(props) {
           Add new item
         </Button>
       ) : (
-        ""
-      )}
+          ""
+        )}
 
       {allYearsOfUniversity.map((universityYear) => {
         return (
@@ -94,8 +94,8 @@ function List(props) {
                                     Edit item
                                   </Button>
                                 ) : (
-                                  ""
-                                )}
+                                    ""
+                                  )}
                               </ExpansionPanelDetails>
                             </ExpansionPanel>
                           );

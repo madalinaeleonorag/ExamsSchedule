@@ -19,6 +19,7 @@ li .MuiGridListTileBar-root {
     margin: 10px;
     font-size: 26px;
     text-align: center;
+    color:rgb(85, 79, 79);
 }
 .exams-grid-text {
     text-align: center;
@@ -26,7 +27,6 @@ li .MuiGridListTileBar-root {
 .exams-grid-dataExamen {
     text-align: center;
     font-size: 28px;
-    font-weight: bold;
     color: white;
     background-color: #3f51b5;
     padding: 40px;
